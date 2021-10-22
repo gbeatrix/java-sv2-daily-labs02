@@ -1,25 +1,31 @@
 package day05;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movie {
     private String title;
     private int year;
     private double avgRating;
-    private int sumOfRatings;
-    private int numOfRatings;
+    private List<Integer> ratings = new ArrayList<>();
 
     public Movie(String title, int year) {
         this.title = title;
         this.year = year;
-        avgRating = 0;
-        sumOfRatings = 0;
-        numOfRatings = 0;
+    }
+
+    private double calcAvgRating(){
+        double sum = 0;
+        for(int rate : ratings){
+            sum += rate;
+        }
+        avgRating = sum/ratings.size();
+        return avgRating;
     }
 
     double rate(int rate){
-        sumOfRatings += rate;
-        ++numOfRatings;
-        avgRating = ((double)sumOfRatings)/numOfRatings;
-        return avgRating;
+        ratings.add(rate);
+        return calcAvgRating();
     }
 
     public String getTitle() {
